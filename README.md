@@ -1,11 +1,42 @@
 # SAM_Template
 
-<a href="https://github.com/HoareLea/SAM_Excel"><img src="https://github.com/HoareLea/SAM/blob/master/Grasshopper/SAM.Core.Grasshopper/Resources/SAM_Small.png" align="left" hspace="10" vspace="6"></a>
+<a href="https://github.com/HoareLea/SAM_Validation"><img src="https://github.com/HoareLea/SAM/blob/master/Grasshopper/SAM.Core.Grasshopper/Resources/SAM_Small.png" align="left" hspace="10" vspace="6"></a>
 
-**SAM** is part of SAM Toolkit that is designed to help engneers to create Analytical Model. Welcome and let's make the opensource journey continue. :handshake:
+**SAM_Validation** is part of SAM Toolkit that is designed to validate SAM Toolkit. Welcome and let's make the opensource journey continue. :handshake:
+
+# SAM_Validation
+
+🧪 A modular validation suite for the Sustainable Analytical Model (SAM) platform developed by Hoare Lea.  
+This repository compares outputs from SAM modules against trusted reference implementations such as PsychroLib and IAPWS-IF97 to ensure numerical correctness, thermodynamic validity, and regression stability.
+
+---
+
+## ✅ Purpose
+
+This repository helps verify the physical and numerical accuracy of core SAM components, such as:
+
+- `SAM_Mollier` (moist air / psychrometrics)
+- `SAM_IAPWS` (pure water/steam thermodynamics)
+- `SAM_SolarCalculator` (solar irradiance and weather input models)
+
+---
+
+## 📁 Structure
+
+SAM_Validation/
+├── tests/
+│ ├── Mollier/ # Validation for SAM_Mollier
+│ ├── IAPWS/ # Placeholder for SAM_IAPWS tests
+│ └── SolarCalculator/ # Placeholder for solar model tests
+├── reference/
+│ └── psychrolib_validation.csv # Golden reference dataset
+├── .github/
+│ └── workflows/test.yml # GitHub Actions for automated testing
+├── README.md
+
 
 ## Resources
-* [Wiki](https://github.com/HoareLea/SAM/wiki)
+* [Wiki](https://github.com/HoareLea/SAM_Validation/wiki)
 
 ## Installing
 
