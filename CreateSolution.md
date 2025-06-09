@@ -6,51 +6,69 @@ If the solution file was not included, no worries — you can create it yourself
 
 ## ✅ Step-by-Step: Create a New Solution and Add Test Project
 
-> Run these in a terminal or command prompt inside your cloned `SAM_Validation/` folder.
+> Run these in a terminal or PowerShell window inside your cloned `SAM_Validation/` folder.
 
-### 1. Navigate to repo root
-```bash
-cd path/to/SAM_Validation
+---
+
+### 1. Make sure you're in the correct directory
+You should already be in:
+```text
+C:\Users\<your-username>\Documents\GitHub\SAM\SAM_Validation
 ```
+✅ No need to use `cd path/to/...`. That was just a placeholder.
+
+---
 
 ### 2. Create a new solution file
-```bash
+```powershell
 dotnet new sln -n SAM_Validation
 ```
-
 This will create:
-```text
+```
 SAM_Validation.sln
-```
-
-### 3. Identify your test project path
-Ensure your test project exists at:
-```
-tests/SAM.Mollier.Tests/SAM.Mollier.Tests.csproj
-```
-If not, create it using:
-```bash
-dotnet new xunit -n SAM.Mollier.Tests -o tests/SAM.Mollier.Tests
-```
-
-### 4. Add the test project to the solution
-```bash
-dotnet sln add tests/SAM.Mollier.Tests/SAM.Mollier.Tests.csproj
-```
-
-### 5. Add `SAM_Mollier` as a project reference to the test project
-(assuming it's cloned side-by-side)
-```bash
-dotnet add tests/SAM.Mollier.Tests/SAM.Mollier.Tests.csproj reference ../SAM_Mollier/SAM_Mollier.csproj
 ```
 
 ---
 
-## ✅ Done!
-You can now run:
-```bash
+### 3. Create the test project (if not already created)
+This step creates the **test project in the `SAM_Validation` repo**, not inside `SAM_Mollier`.
+
+```powershell
+dotnet new xunit -n SAM.Mollier.Tests -o tests/SAM.Mollier.Tests
+```
+
+---
+
+### 4. Add the test project to the solution
+```powershell
+dotnet sln add tests/SAM.Mollier.Tests/SAM.Mollier.Tests.csproj
+```
+
+---
+
+### 5. Reference `SAM_Mollier` engine project
+Make sure the correct path points to:
+```
+C:\Users\<your-username>\Documents\GitHub\SAM\SAM_Mollier\SAM_Mollier\SAM.Core.Mollier\SAM.Core.Mollier.csproj
+```
+Then run:
+```powershell
+dotnet add tests/SAM.Mollier.Tests/SAM.Mollier.Tests.csproj reference ../SAM_Mollier/SAM_Mollier/SAM.Core.Mollier/SAM.Core.Mollier.csproj
+```
+✅ This ensures your test project has access to the real SAM_Mollier engine code.
+
+---
+
+### 6. Run your tests
+```powershell
 dotnet test
 ```
-And it will execute tests defined in `SAM.Mollier.Tests` using `SAM_Validation.sln`.
+You should see:
+```
+Test summary: total: 1, failed: 0, succeeded: 1, skipped: 0
+```
 
-Let me know if you’d like a `.sln` auto-generated and zipped too.
+---
+
+## ✅ Summary
+You’ve created a `.sln`, wired up a dedicated test project, and validated it against `SAM_Mollier` logic — ready for future tests and GitHub CI integration.
