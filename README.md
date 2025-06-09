@@ -23,17 +23,70 @@ This repository helps verify the physical and numerical accuracy of core SAM com
 
 ## 📁 Structure
 
+```
 SAM_Validation/
 ├── tests/
-│ ├── Mollier/ # Validation for SAM_Mollier
-│ ├── IAPWS/ # Placeholder for SAM_IAPWS tests
-│ └── SolarCalculator/ # Placeholder for solar model tests
+│   ├── Mollier/                   # SAM_Mollier validation tests
+│   ├── IAPWS/                     # (planned)
+│   └── SolarCalculator/          # (planned)
 ├── reference/
-│ └── psychrolib_validation.csv # Golden reference dataset
+│   └── psychrolib_validation.csv # Golden data from PsychroLib
 ├── .github/
-│ └── workflows/test.yml # GitHub Actions for automated testing
+│   └── workflows/test.yml        # GitHub Actions for CI
 ├── README.md
+```
 
+---
+
+## 🧪 Current Test Coverage
+
+### ✅ `tests/Mollier/HumidityRatioTests.cs`
+Validates:
+- `HumidityRatio.HumidityRatio(...)` against PsychroLib 2.5.0
+- Tolerance: ±0.0005 kg/kg
+
+More tests to come:
+- Enthalpy
+- Dew point
+- Wet bulb
+
+---
+
+## 🔧 Run the Tests Locally
+
+Ensure you have:
+- [.NET SDK 7.0](https://dotnet.microsoft.com/en-us/download/dotnet/7.0)
+- References to `SAM_Mollier` and optionally `SAM_Psychrometrics`
+
+```bash
+dotnet test
+```
+
+---
+
+## 📚 References
+
+- 🔗 [PsychroLib 2.5.0](https://github.com/psychrometrics/psychrolib)
+- 🔗 [IAPWS-IF97 Steam Tables](https://www.iapws.org/relguide/IF97-Rev.pdf)
+- 🔗 [SAM_Mollier](https://github.com/HoareLea/SAM_Mollier)
+
+---
+
+## 🛠 Roadmap
+
+- [x] Validate humidity ratio (RH-based)
+- [ ] Validate enthalpy, dew point, wet bulb
+- [ ] Add Region 1–5 tests for `SAM_IAPWS`
+- [ ] Validate solar input with `SAM_SolarCalculator`
+- [ ] Shared test utilities & loader helpers
+
+---
+
+## 👥 Maintainers
+
+- **Michal Dengusiak** – Lead architect and domain expert
+
+---
 
 ## Resources
 * [Wiki](https://github.com/HoareLea/SAM_Validation/wiki)
