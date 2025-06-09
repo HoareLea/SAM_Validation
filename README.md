@@ -38,6 +38,10 @@ SAM_Validation/
 
 ---
 
+## 📘 Getting Started
+
+➡️ See [RunInstructions.md](./RunInstructions.md) for first-time setup and test execution.
+
 ## 🧪 Current Test Coverage
 
 ### ✅ `tests/Mollier/HumidityRatioTests.cs`
