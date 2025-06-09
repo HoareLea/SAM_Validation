@@ -15,7 +15,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Using Include="Xunit" />
+    <!-- This 'Using' directive is unnecessary and not valid for xUnit. You can remove it. -->
+    <!-- <Using Include="Xunit" /> -->
   </ItemGroup>
 
   <ItemGroup>
