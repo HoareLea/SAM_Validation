@@ -48,8 +48,8 @@ SAM_Validation/
 - `.github/workflows/`: Continuous Integration workflows.
 
 Each toolkit directory contains:
-- `tests/`: Unit and integration tests.
-- `validation_data/`: Reference data used for validation.
+- `Test/`: Unit and integration tests.
+- `validationfiles/`: Reference data used for validation.
 
 ---
 

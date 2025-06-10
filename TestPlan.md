@@ -41,11 +41,59 @@ This document tracks planned and validated tests across SAM modules.
 
 ## 🛠 How to Add a New Test
 
-1. Add your CSV test dataset to `validation_data/`
-2. Create test class in `tests/{Module}/`
-3. Use `[Theory][MemberData]` for parameterized tests
-4. Set tolerance (e.g. ±0.0005 for x)
-5. Validate with `dotnet test`
+Follow these steps to add a new validation test to the `SAM_Validation` repository:
+
+### ✅ 1. Add Reference Data
+
+Place your CSV file in the appropriate toolkit's validation data folder:
+
+```
+SAM_Validation/
+└── SAM_{Module}/
+    └── validationfiles/
+        └── your_dataset.csv
+```
+
+> Example:  
+> `SAM_Mollier/validationfiles/psychrolib_validation.csv`
+
+---
+
+### ✅ 2. Add a Test Class
+
+Create a new `.cs` test file under the corresponding toolkit's test directory:
+
+```
+SAM_Validation/
+└── SAM_{Module}/
+    └── Test/
+        └── YourNewTest.cs
+```
+
+> Example:  
+> `SAM_Mollier/Test/HumidityRatioTests.cs`
+
+---
+
+### ✅ 3. Implement the Test
+
+In your new test class:
+- Use `[Theory]` and `[MemberData(nameof(GetTestData))]` to supply test cases
+- Read data from the CSV using `AppContext.BaseDirectory` to resolve file paths
+- Use `Assert.True(...)` or `Assert.InRange(...)` to validate results
+- (Optional) Include `Console.WriteLine(...)` for debugging individual test cases
+
+---
+
+### ✅ 4. Run and Verify
+
+From the repo root:
+
+```bash
+dotnet test
+```
+
+You should see output confirming that your test was discovered and executed. If not, confirm the file is in the correct `SAM_{Module}/Test/` folder and properly decorated with `[Fact]` or `[Theory]`.
 
 ---
 
