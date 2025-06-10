@@ -1,10 +1,10 @@
-﻿namespace SAM_IAPWS
+﻿namespace SAM.IAPWS
 {
     [TestClass]
     public sealed partial class Tests
     {
         [TestMethod]
-        public void TestMethod1()
+        public void Test()
         {
             int a = 5;
             int b = 10;

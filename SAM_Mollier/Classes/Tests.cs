@@ -1,6 +1,6 @@
 ﻿using System.Globalization;
 
-namespace SAM_Mollier
+namespace SAM.Mollier
 {
     /// <summary>
     /// Contains unit tests for verifying the functionality of the SAM.Core.Mollier.Query methods.

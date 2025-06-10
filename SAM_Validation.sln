@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SAM_IAPWS", "SAM_IAPWS\SAM_
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SAM_Mollier", "SAM_Mollier\SAM_Mollier.csproj", "{5FC1F323-DB20-417E-90AE-D2F91CE4810A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SAM_Validation", "SAM\SAM_Validation.csproj", "{5A18E1C0-C2A7-4709-AD6F-4B77F41ED239}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SAM_Validation", "SAM_Validation\SAM_Validation.csproj", "{5A18E1C0-C2A7-4709-AD6F-4B77F41ED239}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

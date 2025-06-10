@@ -1,4 +1,4 @@
-﻿namespace SAM_Mollier
+﻿namespace SAM.Mollier
 {
     public sealed partial class Tests
     {
