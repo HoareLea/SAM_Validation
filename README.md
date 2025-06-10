@@ -2,7 +2,7 @@
 
 <a href="https://github.com/HoareLea/SAM_Validation"><img src="https://github.com/HoareLea/SAM/blob/master/Grasshopper/SAM.Core.Grasshopper/Resources/SAM_Small.png" align="left" hspace="10" vspace="6"></a>
 
-**SAM_Validation** is part of SAM Toolkit that is designed to validate SAM Toolkit. Welcome and let's make the opensource journey continue. :handshake:
+**SAM_Validation** is a repository containing validation tests for various SAM toolkits. Welcome and let's make the opensource journey continue. :handshake:
 
 # SAM_Validation
 
@@ -24,26 +24,33 @@ This repository helps verify the physical and numerical accuracy of core SAM com
 ## 📁 Structure
 
 ```
+
 SAM_Validation/
 ├── SAM_Mollier/
-│   ├── EnthalpyTests.cs
-│   ├── HumidityRatioTests.cs
-│   └── validationfiles/
+│   ├── tests/
+│   └── validation_data/
 │       └── psychrolib_validation.csv
 ├── SAM_IAPWS/
-│   ├── [planned tests]
-│   └── validationfiles/
-│       └── [planned data]
+│   ├── tests/
+│   └── validation_data/
 ├── SAM_SolarCalculator/
-│   ├── [planned tests]
-│   └── validationfiles/
-│       └── [planned data]
+│   ├── tests/
+│   └── validation_data/
 ├── .github/
-│   └── workflows/
-│       └── test.yml
-├── README.md
+│   └── workflows/test.yml
+└── README.md
 
 ```
+
+
+- `SAM_Mollier/`: Validation tests for the SAM Mollier toolkit.
+- `SAM_IAPWS/`: Validation tests for the SAM IAPWS toolkit.
+- `SAM_SolarCalculator/`: Validation tests for the SAM Solar Calculator toolkit.
+- `.github/workflows/`: Continuous Integration workflows.
+
+Each toolkit directory contains:
+- `tests/`: Unit and integration tests.
+- `validation_data/`: Reference data used for validation.
 
 ---
 
@@ -53,7 +60,7 @@ SAM_Validation/
 
 ## 🧪 Current Test Coverage
 
-### ✅ `Mollier/HumidityRatioTests.cs`
+### ✅ `SAM_Mollier/HumidityRatioTests.cs`
 Validates:
 - `HumidityRatio.HumidityRatio(...)` against PsychroLib 2.5.0
 - Tolerance: ±0.0005 kg/kg
