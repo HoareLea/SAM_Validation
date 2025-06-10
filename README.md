@@ -25,15 +25,24 @@ This repository helps verify the physical and numerical accuracy of core SAM com
 
 ```
 SAM_Validation/
-├── tests/
-│   ├── Mollier/                   # SAM_Mollier validation tests
-│   ├── IAPWS/                     # (planned)
-│   └── SolarCalculator/          # (planned)
-├── reference/
-│   └── psychrolib_validation.csv # Golden data from PsychroLib
+├── SAM_Mollier/
+│   ├── EnthalpyTests.cs
+│   ├── HumidityRatioTests.cs
+│   └── validationfiles/
+│       └── psychrolib_validation.csv
+├── SAM_IAPWS/
+│   ├── [planned tests]
+│   └── validationfiles/
+│       └── [planned data]
+├── SAM_SolarCalculator/
+│   ├── [planned tests]
+│   └── validationfiles/
+│       └── [planned data]
 ├── .github/
-│   └── workflows/test.yml        # GitHub Actions for CI
+│   └── workflows/
+│       └── test.yml
 ├── README.md
+
 ```
 
 ---
@@ -44,7 +53,7 @@ SAM_Validation/
 
 ## 🧪 Current Test Coverage
 
-### ✅ `tests/Mollier/HumidityRatioTests.cs`
+### ✅ `Mollier/HumidityRatioTests.cs`
 Validates:
 - `HumidityRatio.HumidityRatio(...)` against PsychroLib 2.5.0
 - Tolerance: ±0.0005 kg/kg
