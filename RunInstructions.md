@@ -11,7 +11,7 @@ Make sure you have:
 - [x] [.NET SDK 7.0+](https://dotnet.microsoft.com/en-us/download/dotnet/7.0) installed
 - [x] Cloned the following repositories locally:
   - `SAM_Validation`
-  - `SAM_Mollier` (referenced in the test project)
+  - `SAM_Mollier` (referenced as external code)
 
 ---
 
@@ -22,16 +22,22 @@ Your folder should look like this:
 ```
 Projects/
 ├── SAM_Validation/
-│   ├── tests/
-│   ├── reference/
+│   ├── SAM_Mollier/
+│   │   ├── Test/
+│   │   │   └── HumidityRatioTests.cs
+│   │   └── validationfiles/
+│   │       └── psychrolib_validation.csv
 │   └── SAM_Validation.sln
 └── SAM_Mollier/
-    └── SAM_Mollier.csproj
+    └── SAM.Core.Mollier.csproj
 ```
 
-Ensure that `SAM_Validation` project **references** the local `SAM_Mollier.csproj` file:
+Ensure that the test project in `SAM_Validation/SAM_Mollier/Test/` references the external `SAM_Mollier` engine:
 
-> `dotnet add tests/SAM.Mollier.Tests.csproj reference ../SAM_Mollier/SAM_Mollier.csproj`
+```bash
+# From the root of SAM_Validation
+ dotnet add SAM_Mollier/Test/SAM.Mollier.Tests.csproj reference ../../SAM_Mollier/SAM_Mollier/SAM.Core.Mollier.csproj
+```
 
 ---
 
@@ -40,8 +46,6 @@ Ensure that `SAM_Validation` project **references** the local `SAM_Mollier.cspro
 From the root of the `SAM_Validation` repo:
 
 ```bash
-cd SAM_Validation
-
 dotnet test
 ```
 
@@ -49,12 +53,6 @@ You should see output like:
 
 ```text
 Passed!  - Failed: 0, Passed: 1, Skipped: 0
-```
-
-If something fails, you'll get:
-```text
-Failed ValidateHumidityRatioAgainstReference [T=25, RH=60%]
-Expected 0.0115, got 0.0111
 ```
 
 ---
@@ -69,10 +67,10 @@ dotnet test --filter "FullyQualifiedName~HumidityRatioTests"
 
 ## 🧪 What’s Being Validated
 
-You're running:
-- `HumidityRatioTests.cs`
-- Comparing output from `SAM_Mollier.HumidityRatio(...)`
-- Against values from `reference/psychrolib_validation.csv`
+You're running tests like:
+- `HumidityRatioTests.cs` or `EnthalpyTests.cs`
+- Comparing output from `SAM_Mollier` logic
+- Against values from `SAM_Mollier/validationfiles/psychrolib_validation.csv`
 
 ---
 
@@ -80,17 +78,15 @@ You're running:
 
 | Issue | Fix |
 |-------|-----|
-| `The name 'HumidityRatio' does not exist...` | Check if `SAM_Mollier` is referenced properly |
-| `FileNotFoundException` for CSV | Ensure `reference/psychrolib_validation.csv` is copied correctly |
-| Inaccurate result | Check if `t`, `rh`, or `p` units are passed properly |
+| `The name 'HumidityRatio' does not exist...` | Ensure the correct external project reference is set up |
+| `FileNotFoundException` for CSV | Confirm the path to `validationfiles/*.csv` is resolved correctly |
+| Inaccurate result | Check if `T`, `RH`, or `p` units are passed correctly |
 
 ---
 
 ## ✅ You’re Ready
 
-Once you're confident this works, we can proceed to:
-- Add `EnthalpyTests.cs`
-- Expand reference data
-- Set up GitHub CI to auto-run this on PRs
-
-Let me know when ready!
+Once you're confident this works, you can:
+- Add more tests (e.g. `EnthalpyTests.cs`)
+- Expand your validation dataset
+- Integrate with GitHub CI for automated testing
