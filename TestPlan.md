@@ -41,7 +41,7 @@ This document tracks planned and validated tests across SAM modules.
 
 ## 🛠 How to Add a New Test
 
-1. Add your CSV test dataset to `reference/`
+1. Add your CSV test dataset to `validation_data/`
 2. Create test class in `tests/{Module}/`
 3. Use `[Theory][MemberData]` for parameterized tests
 4. Set tolerance (e.g. ±0.0005 for x)
