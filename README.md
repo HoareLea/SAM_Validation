@@ -26,19 +26,18 @@ This repository helps verify the physical and numerical accuracy of core SAM com
 ```
 
 SAM_Validation/
-├── SAM_Mollier/
-│   ├── tests/
-│   └── validation_data/
-│       └── psychrolib_validation.csv
-├── SAM_IAPWS/
-│   ├── tests/
-│   └── validation_data/
-├── SAM_SolarCalculator/
-│   ├── tests/
-│   └── validation_data/
+├── SAM_Mollier/                   # Validation tests for SAM_Mollier
+│   ├── Test/                      # Test files (e.g., HumidityRatioTests.cs, EnthalpyTests.cs)
+│   └── validationfiles/           # Reference data (e.g., psychrolib_validation.csv)
+├── SAM_IAPWS/                     # Validation tests for SAM_IAPWS
+│   ├── Test/                      # Test files
+│   └── validationfiles/           # Reference data
+├── SAM_SolarCalculator/           # Validation tests for SAM_SolarCalculator
+│   ├── Test/                      # Test files
+│   └── validationfiles/           # Reference data
 ├── .github/
-│   └── workflows/test.yml
-└── README.md
+│   └── workflows/test.yml         # GitHub Actions for CI
+└── README.md					   # Project overview and structure
 
 ```
 
