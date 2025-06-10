@@ -24,7 +24,6 @@ This repository helps verify the physical and numerical accuracy of core SAM com
 ## 📁 Structure
 
 ```
-
 SAM_Validation/
 ├── SAM_Mollier/                   # Validation tests for SAM_Mollier
 │   ├── Test/                      # Test files (e.g., HumidityRatioTests.cs, EnthalpyTests.cs)
@@ -37,15 +36,11 @@ SAM_Validation/
 │   └── validationfiles/           # Reference data
 ├── .github/
 │   └── workflows/test.yml         # GitHub Actions for CI
-└── README.md					   # Project overview and structure
-
+├── README.md                      # Project overview and structure
+├── RunInstructions.md             # How to set up and run the tests
+├── TestPlan.md                    # Summary of test coverage and status
+├── CreateSolution.md              # How to create and configure the solution
 ```
-
-
-- `SAM_Mollier/`: Validation tests for the SAM Mollier toolkit.
-- `SAM_IAPWS/`: Validation tests for the SAM IAPWS toolkit.
-- `SAM_SolarCalculator/`: Validation tests for the SAM Solar Calculator toolkit.
-- `.github/workflows/`: Continuous Integration workflows.
 
 Each toolkit directory contains:
 - `Test/`: Unit and integration tests.
@@ -55,11 +50,15 @@ Each toolkit directory contains:
 
 ## 📘 Getting Started
 
-➡️ See [RunInstructions.md](./RunInstructions.md) for first-time setup and test execution.
+➡️ See [RunInstructions.md](./RunInstructions.md) for first-time setup and test execution.  
+➡️ See [TestPlan.md](./TestPlan.md) for an overview of planned and implemented tests.  
+➡️ See [CreateSolution.md](./CreateSolution.md) for help creating a solution and linking references.
+
+---
 
 ## 🧪 Current Test Coverage
 
-### ✅ `SAM_Mollier/HumidityRatioTests.cs`
+### ✅ `SAM_Mollier/Test/HumidityRatioTests.cs`
 Validates:
 - `HumidityRatio.HumidityRatio(...)` against PsychroLib 2.5.0
 - Tolerance: ±0.0005 kg/kg
@@ -94,7 +93,8 @@ dotnet test
 ## 🛠 Roadmap
 
 - [x] Validate humidity ratio (RH-based)
-- [ ] Validate enthalpy, dew point, wet bulb
+- [x] Validate enthalpy
+- [ ] Validate dew point, wet bulb
 - [ ] Add Region 1–5 tests for `SAM_IAPWS`
 - [ ] Validate solar input with `SAM_SolarCalculator`
 - [ ] Shared test utilities & loader helpers
