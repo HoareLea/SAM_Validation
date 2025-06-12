@@ -21,7 +21,7 @@
         {
             double calculatedEnthalpy = Core.Mollier.Query.Enthalpy(dryBulbTemperature, humidityRatio, pressure) / 1000;
 
-            Validation.Modify.Report(enthalpy, calculatedEnthalpy);
+            Validation.Modify.Report_RelativeError(enthalpy, calculatedEnthalpy);
         }
     }
 }

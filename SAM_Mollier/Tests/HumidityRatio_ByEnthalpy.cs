@@ -20,7 +20,7 @@
             double calculatedHumidityRatio_ByEnthalpy = SAM.Core.Mollier.Query.HumidityRatio_ByEnthalpy(dryBulbTemperature,enthalpy * 1000);
 
             // Report the comparison between the expected and calculated humidity ratio values.
-            SAM.Validation.Modify.Report(humidityRatio, calculatedHumidityRatio_ByEnthalpy,2.0/100);
+            SAM.Validation.Modify.Report_RelativeError(humidityRatio, calculatedHumidityRatio_ByEnthalpy,2.0/100);
         }
     }
 }

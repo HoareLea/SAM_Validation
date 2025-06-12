@@ -20,7 +20,7 @@
             double calculatedHumidityRatio = SAM.Core.Mollier.Query.HumidityRatio(dryBulbTemperature, relativeHumidity, pressure);
 
             // Report the comparison between the expected and calculated humidity ratio values.
-            SAM.Validation.Modify.Report(humidityRatio, calculatedHumidityRatio);
+            SAM.Validation.Modify.Report_RelativeError(humidityRatio, calculatedHumidityRatio);
         }
     }
 }

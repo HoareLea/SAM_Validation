@@ -20,7 +20,7 @@
         {
             double calculatedDryBulbTemperature = SAM.Core.Mollier.Query.DryBulbTemperature(enthalpy * 1000, humidityRatio, pressure);
 
-            SAM.Validation.Modify.Report(dryBulbTemperature, calculatedDryBulbTemperature);
+            SAM.Validation.Modify.Report_RelativeError(dryBulbTemperature, calculatedDryBulbTemperature);
         }
     }
 }

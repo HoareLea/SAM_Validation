@@ -10,7 +10,7 @@
             // Calculate the saturation vapour pressure using both methods
             double calculatedSaturationVapourPressure = Core.Mollier.Query.SaturationVapourPressure(temperature);
             double calculatedSaturationVapourPressure_IAPWS = Core.Mollier.Query.SaturationVapourPressure_IAPWS(temperature);
-            Validation.Modify.Report(calculatedSaturationVapourPressure, calculatedSaturationVapourPressure_IAPWS);
+            Validation.Modify.Report_RelativeError(calculatedSaturationVapourPressure, calculatedSaturationVapourPressure_IAPWS);
         }
 
         public static IEnumerable<object[]> GetTemperatureData()
