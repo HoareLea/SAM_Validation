@@ -1,13 +1,18 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.14.36202.13
+# Visual Studio Version 18
+VisualStudioVersion = 18.0.11217.181 d18.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SAM_IAPWS", "SAM_IAPWS\SAM_IAPWS.csproj", "{CC18AB28-FDF4-4D7E-B45A-A03406ACB9A2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SAM_Mollier", "SAM_Mollier\SAM_Mollier.csproj", "{5FC1F323-DB20-417E-90AE-D2F91CE4810A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SAM_Validation", "SAM_Validation\SAM_Validation.csproj", "{5A18E1C0-C2A7-4709-AD6F-4B77F41ED239}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{0B5632B9-81D8-46FF-B139-112C05D4428C}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
