@@ -3,7 +3,6 @@ name: Run SAM validation tests
 on:
   push:
     branches: [ main ]
-  pull_request:
 
 jobs:
   build:
