@@ -1,27 +1,36 @@
-# SAM_Validation
-
-<a href="https://github.com/HoareLea/SAM_Validation"><img src="https://github.com/HoareLea/SAM/blob/master/Grasshopper/SAM.Core.Grasshopper/Resources/SAM_Small.png" align="left" hspace="10" vspace="6"></a>
-
-**SAM_Validation** is a repository containing validation tests for various SAM toolkits. Welcome and let's make the opensource journey continue. :handshake:
+[![Build](https://github.com/SAM-BIM/SAM_Validation/actions/workflows/build.yml/badge.svg?branch=master)](https://github.com/SAM-BIM/SAM_Validation/actions/workflows/build.yml)
+[![Installer (latest)](https://img.shields.io/github/v/release/SAM-BIM/SAM_Deploy?label=installer)](https://github.com/SAM-BIM/SAM_Deploy/releases/latest)
 
 # SAM_Validation
 
-🧪 A modular validation suite for the Sustainable Analytical Model (SAM) platform developed by Hoare Lea.  
-This repository compares outputs from SAM modules against trusted reference implementations such as PsychroLib and IAPWS-IF97 to ensure numerical correctness, thermodynamic validity, and regression stability.
+<a href="https://github.com/SAM-BIM/SAM">
+  <img src="https://github.com/SAM-BIM/SAM/blob/master/Grasshopper/SAM.Core.Grasshopper/Resources/SAM_Small.png"
+       align="left" hspace="10" vspace="6">
+</a>
+
+**SAM_Validation** is part of the **SAM (Sustainable Analytical Model) Toolkit** —  
+an open-source collection of tools designed to help engineers create, manage,
+and process analytical building models for energy and environmental analysis.
+
+This repository provides a **modular validation and regression test suite**
+used to verify the numerical correctness, physical consistency, and long-term stability
+of SAM core modules against trusted reference implementations.
 
 ---
 
-## ✅ Purpose
+## Purpose
 
-This repository helps verify the physical and numerical accuracy of core SAM components, such as:
+The validation framework supports verification of SAM components such as:
 
-- `SAM_Mollier` (moist air / psychrometrics)
-- `SAM_IAPWS` (pure water/steam thermodynamics)
-- `SAM_SolarCalculator` (solar irradiance and weather input models)
+- `SAM_Mollier` — moist air and psychrometric calculations
+- `SAM_IAPWS` — pure water and steam thermodynamics
+- `SAM_SolarCalculator` — solar and weather-related calculations
+
+Reference libraries include **PsychroLib** and **IAPWS-IF97**.
 
 ---
 
-## 📁 Structure
+## Repository structure
 
 ```
 SAM_Validation/
@@ -42,39 +51,24 @@ SAM_Validation/
 ├── CreateSolution.md              # How to create and configure the solution
 ```
 
-Each toolkit directory contains:
+Each module directory contains:
 - `Test/`: Unit and integration tests.
 - `validationfiles/`: Reference data used for validation.
 
 ---
 
-## 📘 Getting Started
+## Getting Started
 
-➡️ See [RunInstructions.md](./RunInstructions.md) for first-time setup and test execution.  
-➡️ See [TestPlan.md](./TestPlan.md) for an overview of planned and implemented tests.  
-➡️ See [CreateSolution.md](./CreateSolution.md) for help creating a solution and linking references.
+➡️ See [RunInstructions.md](./RunInstructions.md) — how to configure and execute tests
+➡️ See [TestPlan.md](./TestPlan.md) — overview of test coverage and status
+➡️ See [CreateSolution.md](./CreateSolution.md) — solution setup and project linking
 
----
-
-## 🧪 Current Test Coverage
-
-### ✅ `SAM_Mollier/Test/HumidityRatioTests.cs`
-Validates:
-- `HumidityRatio.HumidityRatio(...)` against PsychroLib 2.5.0
-- Tolerance: ±0.0005 kg/kg
-
-More tests to come:
-- Enthalpy
-- Dew point
-- Wet bulb
-
----
 
 ## 🔧 Run the Tests Locally
 
 Ensure you have:
 - [.NET SDK 7.0](https://dotnet.microsoft.com/en-us/download/dotnet/7.0)
-- References to `SAM_Mollier` and optionally `SAM_Psychrometrics`
+- Referenced SAM modules under test
 
 ```bash
 dotnet test
@@ -86,37 +80,25 @@ dotnet test
 
 - 🔗 [PsychroLib 2.5.0](https://github.com/psychrometrics/psychrolib)
 - 🔗 [IAPWS-IF97 Steam Tables](https://www.iapws.org/relguide/IF97-Rev.pdf)
-- 🔗 [SAM_Mollier](https://github.com/HoareLea/SAM_Mollier)
+- 🔗 [SAM_Mollier](https://github.com/SAM_BIM/SAM_Mollier)
 
 ---
 
-## 🛠 Roadmap
+## Development notes
 
-- [x] Validate humidity ratio (RH-based)
-- [x] Validate enthalpy
-- [ ] Validate dew point, wet bulb
-- [ ] Add Region 1–5 tests for `SAM_IAPWS`
-- [ ] Validate solar input with `SAM_SolarCalculator`
-- [ ] Shared test utilities & loader helpers
+- Target framework: **.NET / C#**
+- Coding style follows standard SAM-BIM conventions.
+- New or modified `.cs` files must include the SPDX header from `COPYRIGHT_HEADER.txt`
 
----
+## Licence
 
-## 👥 Maintainers
+This repository is free software licensed under the  
+**GNU Lesser General Public License v3.0 or later (LGPL-3.0-or-later)**.
 
-- **Michal Dengusiak** – Lead architect and domain expert
+Each contributor retains copyright to their respective contributions.  
+The project history (Git) records authorship and provenance of all changes.
 
----
-
-## Resources
-* [Wiki](https://github.com/HoareLea/SAM_Validation/wiki)
-
-## Installing
-
-To install **SAM** from .exe just download and run [latest installer](https://github.com/HoareLea/SAM_Deploy/releases) otherwise rebuild using VS [SAM](https://github.com/HoareLea/SAM)
-
-## Licence ##
-
-SAM is free software licenced under GNU Lesser General Public Licence - [https://www.gnu.org/licenses/lgpl-3.0.html](https://www.gnu.org/licenses/lgpl-3.0.html)  
-Each contributor holds copyright over their respective contributions.
-The project versioning (Git) records all such contribution source information.
-See [LICENSE](https://github.com/HoareLea/SAM_Template/blob/master/LICENSE) and [COPYRIGHT_HEADER](https://github.com/HoareLea/SAM/blob/master/COPYRIGHT_HEADER.txt).
+See:
+- `LICENSE`
+- `NOTICE`
+- `COPYRIGHT_HEADER.txt`
