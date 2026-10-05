@@ -1,6 +1,6 @@
 # SAM TAS ↔ OpenStudio Benchmark Programme — Implementation Plan (B0–B6)
 
-> **Revision 3** — incorporates stakeholder corrections: (1) `feature/benchmark-*` branch names; (2) unavailable metrics carry `value: null`; (3) dual model hashes; (4) build-order verified to live in per-repo CI, not a SAM PR; (5) conditioning equivalence is a **candidate** in B0, frozen only after the first TAS SingleBox validation; (6) B5 GH host deferred to B5 kickoff; (7) **commit and push the feature branch after every stage** for multi-laptop continuity; plus a per-milestone **model-allocation** plan and a **mandatory Git rules** block for every implementation prompt.
+> **Revision 3:** (1) `feature/benchmark-*` branch names; (2) unavailable metrics carry `value: null`; (3) dual model hashes; (4) build-order verified to live in per-repo CI, not a SAM PR; (5) conditioning equivalence is a **candidate** in B0, frozen only after the first TAS SingleBox validation; (6) B5 GH host deferred to B5 kickoff.
 
 ## Context
 
@@ -8,7 +8,7 @@ We need a **defensible, repeatable benchmark** comparing two independent buildin
 
 The **primary gate** harmonises *conditioning semantics* — OpenStudio **Ideal Loads** vs the equivalent idealised TAS route (thermostats + IZAMs + TBD sizing). This pairing is a **candidate** until the first TAS SingleBox run confirms meaningful conditioning, annual energy and loads (see D10). Production HVAC (TAS **TPD** plant) is deferred to a later, separately-labelled *informational* comparison. All work branches off **`sow/2026-Q3`** in each repo and merges back into `sow/2026-Q3`.
 
-This plan is grounded in direct repository inspection (findings in §2). Three architecture forks were resolved with the stakeholder (§3).
+This plan is grounded in direct repository inspection (findings in §2). Three architecture forks are resolved in §3.
 
 ---
 
@@ -128,7 +128,7 @@ This plan is grounded in direct repository inspection (findings in §2). Three a
 | # | Decision | Resolution | Rationale |
 |---|----------|------------|-----------|
 | D1 | Schema shape | **Independent, versioned DTOs** (`SAM.Analytical.Benchmark`, netstandard2.0, STJ-only, zero deps). | Result types are enum-keyed graph bags with misleading unit labels; comparator must not drag in `SAM.Analytical`/engines. Independent DTOs = clean isolation + explicit versioned wire contract. |
-| D2 | Schema location | **Standalone lib in the `SAM_Validation` repo** (stakeholder-confirmed), output to `SAM_Validation\build\`. | Honours programme decision #1; versioned alongside its comparator. Build-order handled in per-repo CI (see D3-build below), **not** a SAM PR. |
+| D2 | Schema location | **Standalone lib in the `SAM_Validation` repo**, output to `SAM_Validation\build\`. | Honours programme decision #1; versioned alongside its comparator. Build-order handled in per-repo CI (see D3-build below), **not** a SAM PR. |
 | D3 | Invocation | **Three thin console CLIs** (`benchmark-openstudio`, `benchmark-tas`, `benchmark-compare`) over **one shared CLI host** in the schema lib; extensible. | A single cross-engine exe is impossible under isolation rules. Shared host = arg parsing, invariant-culture JSON I/O, stable exit codes, written once. |
 | D3-build | Build order | B1a: schema project outputs to `SAM_Validation\build\` + is added to SAM_Validation's solution (its CI already builds the solution). B1b/B2: each engine repo's **own** `.github/workflows/build.yml` gains a step to clone `SAM_Validation` @ matching branch and build **only** `SAM.Analytical.Benchmark.csproj` → `SAM_Validation\build\`. Root `BuildAlls*` (untracked) updated locally only. | Verified: build order is tracked per-repo in CI, not in SAM nor the untracked root. Keeps each change inside the repo that needs it; no implicit cross-repo edits. |
 | D4 | Canonical units | Schema stores **explicit unit tokens**; producers convert at emit; **pin consumption magnitude empirically in B1**. | Enum labels contradict the legacy consumer; requirement forbids name-based inference. |
@@ -164,7 +164,7 @@ If B1a's build-order verification finds the change must touch a repo not listed 
 
 ## 5. Detailed implementation steps per milestone
 
-> Every implementation session must begin with the **Mandatory Git & repository rules** (§13) and verify that named files live in the stated repo before editing.
+> Before editing, verify that the files named in each milestone live in the stated repo.
 
 ### B0 — Methodology & contracts (docs only)
 - **Objective:** freeze the engine-neutral contract: metric definitions, canonical units, sign, tolerance bands, provenance fields (incl. dual hashes §7), missing-data semantics (`available`/`null` invariant), space-alignment rules, the four routes. Record the **candidate** conditioning pairing (D10) — explicitly *not yet frozen*.
@@ -337,7 +337,7 @@ All branches created from `sow/2026-Q3`; all PRs target `sow/2026-Q3`.
 | 8 | B5 | *selected GH repo* | `feature/benchmark-b5-gh-viewer` |
 | 9 | B6 | SAM_Validation | `feature/benchmark-b6-docs-report` |
 
-Ordering rule: **B1a first**; B1b/B2/B3 parallelisable after B1a (B2 also gates the D10 conditioning freeze); B4 after B1b; B5/B6 after B3 (B6 also after B2+B4). **One milestone per session.**
+Ordering rule: **B1a first**; B1b/B2/B3 parallelisable after B1a (B2 also gates the D10 conditioning freeze); B4 after B1b; B5/B6 after B3 (B6 also after B2+B4). One milestone per PR.
 
 ---
 
@@ -452,75 +452,6 @@ Ordering rule: **B1a first**; B1b/B2/B3 parallelisable after B1a (B2 also gates 
 
 ---
 
-## 11. Recommended first implementation prompt (B0 only)
+## 11. Branch hygiene
 
-> Prepend the **Mandatory Git & repository rules** (§13) to this prompt.
->
-> **Implement milestone B0 (methodology & contracts) for the SAM TAS↔OpenStudio benchmark.** Repo `SAM_Validation`, branch `feature/benchmark-b0-methodology` created from `sow/2026-Q3`; PR targets `sow/2026-Q3`. **Docs only — no code.**
->
-> Create under `SAM_Validation/docs/benchmark/`:
-> - `METHODOLOGY.md` — the two-stage file-mediated workflow; the four routes (Native SAM→TAS, Native SAM→OpenStudio, shared-gbXML→both [optional], later TPD production [informational]); the **candidate** primary conditioning pairing **OpenStudio Ideal Loads ↔ TAS thermostats + IZAMs + TBD sizing** (state explicitly it is *not frozen* until the first TAS SingleBox run in B2 confirms meaningful conditioning, annual energy and loads); production HVAC is a separately-labelled later comparison.
-> - `METRICS.md` — each metric's definition, canonical unit, sign convention, exact both-route SAM result-parameter source; include the §2.10 availability matrix; **explicitly list excluded metrics** (per-space annual energy; monthly profiles) with evidence; flag caveats: (a) peak-load definition differs (OpenStudio coincident-total vs TAS building-profile max); (b) model consumption stored-magnitude (Wh vs kWh) **unresolved, pinned empirically in B1b**.
-> - `SCHEMA.md` — prose spec of the v1.0.0 schema in §7: provenance (**dual hashes `sourceFileHash` + `canonicalModelHash` + `canonicalizationVersion`**), model, spaces; every metric a `MetricValue` with explicit unit + `available` flag and the **availability invariant** (`available=false ⇒ value null`; real 0 ⇒ 0+available; **never 0 for unavailable**); `schemaVersion` semver policy + comparator compatibility (equal major required; minor drift warns).
-> - `TOLERANCES.md` — provisional bands **±5% warn / ±15% fail** as **configurable reporting bands, NOT validated thresholds**; near-zero absolute-floor rule; unavailable⇒"N/A" (never fail); peak-hour circular/year-boundary comparison; model-total vs sum-of-spaces reconciliation.
-> - `GLOSSARY.md` — engine, route, provenance, canonical unit, tolerance band, gate status, canonicalization.
->
-> Constraints: no absolute/machine-specific paths; align with verified findings (System.Text.Json, Space Guid identity, `Query.Source()` provenance, `IntervalHourOfYear` peak hours). Keep each doc scannable. Commit in three boundaries: (1) methodology+glossary; (2) metrics+units; (3) tolerances+schema-spec. Open a PR to `sow/2026-Q3` titled "B0 — benchmark methodology & contracts". Do not modify any code or existing tests. Mark the energy-modeller review as a required human check before merge.
-
----
-
-## 12. Model allocation & session discipline
-
-Run **one milestone per session**; do not hand B1–B6 to a single model in one continuous run.
-
-| Milestone | Recommended model |
-|---|---|
-| B0 documentation | **Codex 5.6-SOL High** |
-| B1a schema, serializer, deterministic tests | **Codex 5.6-SOL High** |
-| B1b OpenStudio producer | **Codex 5.6-SOL High** |
-| B2 TAS producer | **Kimi**, followed by **Codex review** |
-| B3 comparator & reports | **Codex 5.6-SOL High** |
-| B4 corpus preparation | **Kimi** |
-| B2b OpenStudio SDK spike | **Codex 5.6-SOL High** |
-| B5 Grasshopper components | **Codex 5.6-SOL High** |
-| B6 documentation & report assembly | **Kimi** |
-
-Kimi fits B2 (well-specified orchestration around existing APIs) and B4/B6 (mechanical corpus/doc assembly). Deterministic-serialization, comparator, and SDK-spike work go to Codex 5.6-SOL High. **Immediate next step: B0 with Codex 5.6-SOL High; after B0 is reviewed and merged, start B1a in a fresh session.**
-
-Because sessions run on different laptops, **each session ends by committing and pushing its feature branch(es)** so the next session resumes from remote — see the *Multi-laptop continuity* rule in §13.
-
----
-
-## 13. Mandatory Git & repository rules (include in EVERY implementation prompt)
-
-All implementation work starts from the current `sow/2026-Q3` branch in each affected repository. For every repository modified:
-
-1. Confirm the working tree is clean.
-2. Fetch current remote branches.
-3. Check out `sow/2026-Q3`.
-4. Fast-forward from `origin/sow/2026-Q3`.
-5. Create the milestone-specific `feature/benchmark-*` branch.
-6. Commit only files belonging to that repository and milestone.
-7. Push the feature branch.
-8. Open the PR against `sow/2026-Q3` — never `master` or another feature branch.
-
-```bash
-git status
-git fetch origin
-git checkout sow/2026-Q3
-git pull --ff-only origin sow/2026-Q3
-git checkout -b <milestone-feature-branch>
-```
-
-- If a repo lacks `sow/2026-Q3`, or it cannot fast-forward cleanly, **stop before modifying files** and report the exact repo and Git state.
-- **Do not reuse one branch across repositories.** Each repo gets its own feature branch, commits and PR.
-- **Before implementation, verify the files named in the plan actually live in the stated repository.** In particular, confirm the build-order change lives in each engine repo's own `.github/workflows/build.yml` (verified: the root `BuildAlls*` files are untracked and belong to no repo; do **not** rely on or commit them).
-
-### Multi-laptop continuity (REQUIRED — Michal works across several laptops)
-
-Michal moves between several laptops with different Windows user profiles (see [[two-laptop-workspace-paths]]). To avoid stranding work on one machine:
-
-- **Commit and push the feature branch at the end of every B stage/session** — a stage is only "done for this session" once `git push` has succeeded. Never leave a milestone's work committed-but-unpushed, or uncommitted, on a single laptop.
-- **Push work-in-progress commits too**, not only at PR time, so any laptop always has the latest state. Keep messages conventional (`docs:`/`feat:`/`fix:`/…) and end them with the `Co-Authored-By` trailer.
-- **When resuming a stage on another laptop**, do NOT recreate the branch: `git fetch origin` → `git checkout feature/benchmark-<id>` → `git pull --ff-only origin feature/benchmark-<id>`, then continue. If the local branch is behind and cannot fast-forward, stop and report before editing.
-- Because each repo has its own feature branch, **push every affected repo's branch** at stage end (a milestone that touches two repos must push both).
+Each milestone branches from `sow/2026-Q3` (as a `feature/benchmark-*` branch) in every affected repository and opens its PR back into `sow/2026-Q3`.
